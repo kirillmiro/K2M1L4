@@ -37,7 +37,6 @@ def feed(message):
     else:
         bot.reply_to(message, "Сначала создай покемона командой /go")
 
-
 @bot.message_handler(commands=['info'])
 def info(message):
     if message.from_user.username in Pokemon.pokemons:
