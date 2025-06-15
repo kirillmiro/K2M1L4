@@ -26,14 +26,13 @@ def attack_pok(message):
     else:
             bot.send_message(message.chat.id, "Чтобы атаковать, нужно ответить на сообщения того, кого хочешь атаковать")
 
-
 @bot.message_handler(commands=['feed'])
 def feed(message):
     username = message.from_user.username
     if username in Pokemon.pokemons:
         pokemon = Pokemon.pokemons[username]
-        pokemon.base_experience += 1
-        bot.reply_to(message, f"{pokemon.name} покормлен! Опыт теперь: {pokemon.base_experience}")
+        responce = pokemon.feed()
+        bot.reply_to(message, responce)
     else:
         bot.reply_to(message, "Сначала создай покемона командой /go")
 
@@ -43,6 +42,6 @@ def info(message):
         pokemon = Pokemon.pokemons[message.from_user.username]
         bot.send_message(message.chat.id, pokemon.info())
     else:
-        bot.reply_to(message, "Сначала создай покемона командой /go")
+        bot.reply_to(message, "Сначала создай покемона командой /go")   
 
 bot.infinity_polling(none_stop=True)
